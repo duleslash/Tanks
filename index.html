@@ -1,53 +1,136 @@
-This game is similar to other card battle games like Hearthstone, Yu Gi Oh,Magic Duels...
-The card background is visa background and in the front side we have card chip and visa 
-logo in frame and image with title and description of the card.
-When player plays by dragging it in the middle of the screen the card it will go in virtual atm machine in the middle and it will be spent.
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Unity Web Player | Tanks</title>
+		<script type='text/javascript' src='https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js'></script>
+		<script type="text/javascript">
+		<!--
+		var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
+		if (document.location.protocol == 'https:')
+			unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
+		document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
+		-->
+		</script>
+		<script type="text/javascript">
+		<!--
+			var config = {
+				width: 960, 
+				height: 600,
+				params: { enableDebugging:"0" }
+				
+			};
+			var u = new UnityObject2(config);
 
-For more info and test check the Hearthstone game:
-https://play.google.com/store/apps/details?id=com.blizzard.wtcg.hearthstone (Android)
-https://itunes.apple.com/app/hearthstone-heroes-warcraft/id625257520?ls=1&amp;mt=8 (ios)
+			jQuery(function() {
 
-We have hero and the cards.
-Hero will be chosen from Majid and other cartoon characters.
-At the begining of the game player could chose his card deck. If player has no deck he will play with random card deck.
-Player can make new deck by choosing 20 cards.
-He could save and edit the decks and he can have 10 different decks at the time.
-
-Cards types could be Hologram,  Magic and a Secret card. Each card has its costs to be used.
-
-Hologram is a minion that can attack and be attacked and it has damage and health. 
-(Damage and health will be numbers from 1 to 20 only so it will be easy to calculate for younger children.)
-When Hologram is attacked it will lose health points exact of how many damage has attackers Hologram. 
-Attacker's Hologram will also lose point by the damage of the defander. If any hologram has 0 or 
-less health it will disappear.
-If Hologram attack hero, hero will lose health by hologram's damage but hologram will not lose anything.
-
-Hologram could have passive spells.
-Passive spells will happen:
-- when you play that hologram card (when you play this hologram it will give all your holograms +1 attack,...)
-- when it attacks (when this hologram attacks hologram he will destroy it,...)
-- when it is attack (when this hologram is attacked he will deal same damage to the enemy hero,...)
-- while its alive- (your hero cant take damage while this hologram is alive,...)
-
-Hologram can also have atributes:
--Deffander - it will mean that other player can only attack deffanders if there 
--CreditCard - it can be used even if you dont have enough money, but it will require that money to be returnd in next turn. 
-If player doesnt have enough money in next turn it will only take until balance not negative (equivals to zero).
-Example:card cost 100$ you have 50$ you can use that card but in next turn you will return 50$.
-
-Spells card are card that will do something when you play them.
-Examples: Deal 3 damage to the hologram, deal 3 damage to all enemy holograms, heal all of your holograms by 1 health,...
-
-
-Secrets are card that will do somthing when event is right.
-Example:When enemy hologram attacks your hero, it will be destroyed, When enemy plays hologram deal 4 damage to it,...
-When secret is playd enemy will not see what was played until event occurs. He will only see a hint that some secret card was played.
-
-Money:
-Player will have money on a bank account and in each turn he will get more.
-When he plays some card he will lose money equivalent to its cost. If he hasn't enough money he cant play that card exept if that card has credit card ability.
-
-Goal of the game is to "kill" the hero. Offcourse hero will not die, player will just lose game.
-It can be multiplayer or vs AI.
-Monetization will be inapp market where player can by cards.
-Card holograms can be animals or robots or anything else. We could also choose to go with two or more different types of holograms.
+				var $missingScreen = jQuery("#unityPlayer").find(".missing");
+				var $brokenScreen = jQuery("#unityPlayer").find(".broken");
+				$missingScreen.hide();
+				$brokenScreen.hide();
+				
+				u.observeProgress(function (progress) {
+					switch(progress.pluginStatus) {
+						case "broken":
+							$brokenScreen.find("a").click(function (e) {
+								e.stopPropagation();
+								e.preventDefault();
+								u.installPlugin();
+								return false;
+							});
+							$brokenScreen.show();
+						break;
+						case "missing":
+							$missingScreen.find("a").click(function (e) {
+								e.stopPropagation();
+								e.preventDefault();
+								u.installPlugin();
+								return false;
+							});
+							$missingScreen.show();
+						break;
+						case "installed":
+							$missingScreen.remove();
+						break;
+						case "first":
+						break;
+					}
+				});
+				u.initPlugin(jQuery("#unityPlayer")[0], "WebBuild.unity3d");
+			});
+		-->
+		</script>
+		<style type="text/css">
+		<!--
+		body {
+			font-family: Helvetica, Verdana, Arial, sans-serif;
+			background-color: white;
+			color: black;
+			text-align: center;
+		}
+		a:link, a:visited {
+			color: #000;
+		}
+		a:active, a:hover {
+			color: #666;
+		}
+		p.header {
+			font-size: small;
+		}
+		p.header span {
+			font-weight: bold;
+		}
+		p.footer {
+			font-size: x-small;
+		}
+		div.content {
+			margin: auto;
+			width: 960px;
+		}
+		div.broken,
+		div.missing {
+			margin: auto;
+			position: relative;
+			top: 50%;
+			width: 193px;
+		}
+		div.broken a,
+		div.missing a {
+			height: 63px;
+			position: relative;
+			top: -31px;
+		}
+		div.broken img,
+		div.missing img {
+			border-width: 0px;
+		}
+		div.broken {
+			display: none;
+		}
+		div#unityPlayer {
+			cursor: default;
+			height: 600px;
+			width: 960px;
+		}
+		-->
+		</style>
+	</head>
+	<body>
+		<p class="header"><span>Unity Web Player | </span>Tanks</p>
+		<div class="content">
+			<div id="unityPlayer">
+				<div class="missing">
+					<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
+						<img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63" />
+					</a>
+				</div>
+				<div class="broken">
+					<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now! Restart your browser after install.">
+						<img alt="Unity Web Player. Install now! Restart your browser after install." src="http://webplayer.unity3d.com/installation/getunityrestart.png" width="193" height="63" />
+					</a>
+				</div>
+			</div>
+		</div>
+		<p class="footer">&laquo; created with <a href="http://unity3d.com/unity/" title="Go to unity3d.com">Unity</a> &raquo;</p>
+	</body>
+</html>
